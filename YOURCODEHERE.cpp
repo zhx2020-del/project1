@@ -17,32 +17,6 @@
 
 using namespace std;
 
-//return the size of dl1(L1 data cache)
-unsigned int getdl1size(std::string configuration) {
-	unsigned int dl1sets = 32 << extractConfigPararm(configuration, 3);
-	unsigned int dl1assoc = 1 << extractConfigPararm(configuration, 4);
-	unsigned int dl1blocksize = 8
-		* (1 << extractConfigPararm(configuration, 2));
-	return dl1assoc * dl1sets * dl1blocksize;
-}
-
-//return the size of il1(L1 instruction cache)
-unsigned int getil1size(std::string configuration) {
-	unsigned int il1sets = 32 << extractConfigPararm(configuration, 5);
-	unsigned int il1assoc = 1 << extractConfigPararm(configuration, 6);
-	unsigned int il1blocksize = 8
-		* (1 << extractConfigPararm(configuration, 2));
-	return il1assoc * il1sets * il1blocksize;
-}
-
-//return the size of l2(unified L2 cache)
-unsigned int getl2size(std::string configuration) {
-	unsigned int l2sets = 256 << extractConfigPararm(configuration, 7);
-	unsigned int l2blocksize = 16 << extractConfigPararm(configuration, 8);
-	unsigned int l2assoc = 1 << extractConfigPararm(configuration, 9);
-	return l2assoc * l2sets * l2blocksize;
-}
-
 //latency is related to cache size and set associative
 //This function is used to get the latency of dl1 and il1
 unsigned int latencycal(unsigned int size, unsigned int assoc) {
