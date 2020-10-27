@@ -344,9 +344,6 @@ std::string generateCacheLatencyParams(string halfBackedConfig) {
 	//
 	//YOUR CODE ENDS HERE
 	//
-	cout << "dl1size: " << dl1size << "dl1assoc: " << dl1assoc << endl;
-	cout << latencySettings << endl;
-
 	return latencySettings;
 }
 
@@ -386,51 +383,71 @@ int validateConfiguration(std::string configuration) {
 
 	//il1blocksize has to be equal to ifqsize
 	if (il1blocksize < ifqsize) {
+		cout << "wrong config: "<<configuration<<enl;
+		cout << "il1blocksize: " << il1blocksize << "ifqsize: " << ifqsize <<"has to be equal"<<endl;
 		return 0;
 	}
 
 	//il1blocksize has to be equal to dl1blocksize
-	if (il1size != dl1size) {
+	if (il1blocksize != dl1blocksize) {
+		cout << "wrong config: " << configuration << enl;
+		cout << "il1blocksize: " << il1blocksize << "dl1blocksize: " << dl1blocksize << "has to be equal" << endl;
 		return 0;
 	}
 
 	//the minimum size of il1 is: 2KB
 	if (il1size < (2 * 1024)) {
+		cout << "wrong config: " << configuration << enl;
+		cout << "il1size: "<< il1size <<"the minimum size of il1 is: 2KB"<<endl;
 		return 0;
 	}
 
 	//the maximum size of il1 is: 64KB
 	if (il1size > (64 * 1024)) {
+		cout << "wrong config: " << configuration << enl;
+		cout << "il1size: " << il1size << "the maximum size of il1 is: 64KB" << endl;
 		return 0;
 	}
 
 	//the minimum size of dl1 is: 2KB
 	if (dl1size < (2 * 1024)) {
+		cout << "wrong config: " << configuration << enl;
+		cout << "dl1size: " << dl1size << "the minimum size of dl1 is: 2KB" << endl;
 		return 0;
 	}
 
 	//the maximum size of dl1 is: 64KB
 	if (dl1size > (64 * 1024)) {
+		cout << "wrong config: " << configuration << enl;
+		cout << "dl1size: " << dl1size << "the maximum size of dl1 is: 64KB" << endl;
 		return 0;
 	}
 
 	//ul2blocksize has to bigger than 2 times of blocksize of il1
 	if (l2blocksize < temp) {
+		cout << "wrong config: " << configuration << enl;
+		cout << "l2blocksize: " << l2blocksize <<"temp: "<<temp<<"ul2blocksize has to bigger than 2 times of blocksize of il1" << endl;
 		return 0;
 	}
 
 	//ul2size has to bigger than 2 times of (dl1size + il1size)
 	if (l2size < temp2) {
+		cout << "wrong config: " << configuration << enl;
+		cout << "l2size: " << l2size << "temp2: " << temp2 << "ul2size has to bigger than 2 times of (dl1size + il1size)" << endl;
 		return 0;
 	}
 
 	//The minimum size of l2: 32KB
 	if (l2size < (32 * 1024)) {
+		cout << "wrong config: " << configuration << enl;
+		cout << "l2size: " << l2size << "The minimum size of l2: 32KB" << endl;
 		return 0;
 	}
 
 	//The maximum size of l2: 1024KB
 	if (l2size > (1024 * 1024)) {
+		cout << "wrong config: " << configuration << enl;
+		cout << "l2size: " << l2size << "The maximum size of l2: 1024KB" << endl;
 		return 0;
 	}
 	// The below is a necessary, but insufficient condition for validating a
@@ -483,6 +500,7 @@ std::string generateNextConfigurationProposal(std::string currentconfiguration,
 
 		// Fill in the dimensions already-scanned with the already-selected best
 		// value.
+		cout << "the bestconfig: " << bestConfig << endl;
 		for (int dim = 0; dim < currentlyExploringDim; ++dim) {
 			ss << extractConfigPararm(bestConfig, dim) << " ";
 		}
