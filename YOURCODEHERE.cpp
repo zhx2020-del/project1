@@ -94,7 +94,7 @@ unsigned int latencycal(unsigned int size, unsigned int assoc) {
 		}
 	}
 	//cache size == 16 KB
-	else if (size == (16 * 1024) {
+	else if (size == (16 * 1024)) {
 		if (assoc == 2) {
 			latency = 4 + 1;
 			return latency;
@@ -109,7 +109,7 @@ unsigned int latencycal(unsigned int size, unsigned int assoc) {
 		}
 	}
 	//cache size == 32 KB
-	else if (size == (32 * 1024) {
+	else if (size == (32 * 1024)) {
 		if (assoc == 2) {
 			latency = 5 + 1;
 			return latency;
@@ -144,7 +144,7 @@ unsigned int latencycal(unsigned int size, unsigned int assoc) {
 unsigned int latencycal2(unsigned int size, unsigned int assoc) {
 	unsigned int latency = 0;
 	//cache size == 32 KB
-	if (size == (32 * 1024) {
+	if (size == (32 * 1024)) {
 		if (assoc == 2) {
 			//size latency + associative latency
 			latency = 5 + 1;
@@ -183,7 +183,7 @@ unsigned int latencycal2(unsigned int size, unsigned int assoc) {
 		}
 	}
 	//cache size == 128 KB
-	else if (size == (128 * 1024) {
+	else if (size == (128 * 1024)) {
 		if (assoc == 2) {
 			latency = 7 + 1;
 			return latency;
@@ -202,7 +202,7 @@ unsigned int latencycal2(unsigned int size, unsigned int assoc) {
 		}
 	}
 	//cache size == 256 KB
-	else if (size == (256 * 1024) {
+	else if (size == (256 * 1024)) {
 		if (assoc == 2) {
 			latency = 8 + 1;
 			return latency;
@@ -221,7 +221,7 @@ unsigned int latencycal2(unsigned int size, unsigned int assoc) {
 		}
 	}
 	//cache size == 512 KB
-	else if (size == (512 * 1024) {
+	else if (size == (512 * 1024)) {
 		if (assoc == 2) {
 			latency = 9 + 1;
 			return latency;
@@ -240,7 +240,7 @@ unsigned int latencycal2(unsigned int size, unsigned int assoc) {
 		}
 	}
 	//cache size == 1024 KB
-	else if (size == (1024 * 1024) {
+	else if (size == (1024 * 1024)) {
 		if (assoc == 2) {
 			latency = 10 + 1;
 			return latency;
@@ -298,16 +298,16 @@ std::string generateCacheLatencyParams(string halfBackedConfig) {
 	//get the size of dl1
 	dl1size = getdl1size(halfBackedConfig);
 	//get the assoc of dl1
-	dl1assoc = 1 << extractConfigPararm(configuration, 4);
+	dl1assoc = 1 << extractConfigPararm(halfBackedConfig, 4);
 	//get the latency of dl1
 	latency1 = latencycal(dl1size, dl1assoc);
 
 	il1size = getil1size(halfBackedConfig);
-	il1assoc = 1 << extractConfigPararm(configuration, 6);
+	il1assoc = 1 << extractConfigPararm(halfBackedConfig, 6);
 	latency2 = latencycal(il1size, il1assoc);
 
 	l2size = getl2size(halfBackedConfig);
-	l2assoc = 1 << extractConfigPararm(configuration, 9);
+	l2assoc = 1 << extractConfigPararm(halfBackedConfig, 9);
 	latency3 = latencycal2(l2size, l2assoc);
 
 	//set up latency of dl1
