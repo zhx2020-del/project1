@@ -332,7 +332,9 @@ std::string generateCacheLatencyParams(string halfBackedConfig) {
 	//
 	//YOUR CODE ENDS HERE
 	//
+	cout << "dl1size: " << dl1size << "dl1assoc: " << dl1assoc << endl;
 	cout << latencySettings << endl;
+
 	return latencySettings;
 }
 
