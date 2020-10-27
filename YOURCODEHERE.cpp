@@ -17,10 +17,253 @@
 
 using namespace std;
 
+//return the size of dl1(L1 data cache)
+unsigned int getdl1size(std::string configuration) {
+	unsigned int dl1sets = 32 << extractConfigPararm(configuration, 3);
+	unsigned int dl1assoc = 1 << extractConfigPararm(configuration, 4);
+	unsigned int dl1blocksize = 8
+		* (1 << extractConfigPararm(configuration, 2));
+	return dl1assoc * dl1sets * dl1blocksize;
+}
+
+//return the size of il1(L1 instruction cache)
+unsigned int getil1size(std::string configuration) {
+	unsigned int il1sets = 32 << extractConfigPararm(configuration, 5);
+	unsigned int il1assoc = 1 << extractConfigPararm(configuration, 6);
+	unsigned int il1blocksize = 8
+		* (1 << extractConfigPararm(configuration, 2));
+	return il1assoc * il1sets * il1blocksize;
+}
+
+//return the size of l2(unified L2 cache)
+unsigned int getl2size(std::string configuration) {
+	unsigned int l2sets = 256 << extractConfigPararm(configuration, 7);
+	unsigned int l2blocksize = 16 << extractConfigPararm(configuration, 8);
+	unsigned int l2assoc = 1 << extractConfigPararm(configuration, 9);
+	return l2assoc * l2sets * l2blocksize;
+}
+
+//latency is related to cache size and set associative
+//This function is used to get the latency of dl1 and il1
+unsigned int latencycal(unsigned int size, unsigned int assoc) {
+	unsigned int latency = 0;
+	//cache size == 2 KB
+	if (size == (2 * 1024)) {
+		if (assoc == 2) {
+			//size latency + associative latency
+			latency = 1 + 1;
+			return latency;
+		}
+		else if (assoc == 4) {
+			latency = 1 + 2;
+			return latency;
+		}
+		else if (assoc == 8) {
+			latency = 1 + 3;
+			return latency;
+		}
+	}
+	//cache size == 4 KB
+	else if (size == (4 * 1024)) {
+		if (assoc == 2) {
+			latency = 2 + 1;
+			return latency;
+		}
+		else if (assoc == 4) {
+			latency = 2 + 2;
+			return latency;
+		}
+		else if (assoc == 8) {
+			latency = 2 + 3;
+			return latency;
+		}
+	}
+	//cache size == 8 KB
+	else if (size == (8 * 1024)) {
+		if (assoc == 2) {
+			latency = 3 + 1;
+			return latency;
+		}
+		else if (assoc == 4) {
+			latency = 3 + 2;
+			return latency;
+		}
+		else if (assoc == 8) {
+			latency = 3 + 3;
+			return latency;
+		}
+	}
+	//cache size == 16 KB
+	else if (size == (16 * 1024) {
+		if (assoc == 2) {
+			latency = 4 + 1;
+			return latency;
+		}
+		else if (assoc == 4) {
+			latency = 4 + 2;
+			return latency;
+		}
+		else if (assoc == 8) {
+			latency = 4 + 3;
+			return latency;
+		}
+	}
+	//cache size == 32 KB
+	else if (size == (32 * 1024) {
+		if (assoc == 2) {
+			latency = 5 + 1;
+			return latency;
+		}
+		else if (assoc == 4) {
+			latency = 5 + 2;
+			return latency;
+		}
+		else if (assoc == 8) {
+			latency = 5 + 3;
+			return latency;
+		}
+	}
+	//cache size == 64 KB
+	else if (size == (64 * 1024)) {
+		if (assoc == 2) {
+			latency = 6 + 1;
+			return latency;
+		}
+		else if (assoc == 4) {
+			latency = 6 + 2;
+			return latency;
+		}
+		else if (assoc == 8) {
+			latency = 6 + 3;
+			return latency;
+		}
+	}
+}
+
+//This function is used to get the latency of ul2
+unsigned int latencycal2(unsigned int size, unsigned int assoc) {
+	unsigned int latency = 0;
+	//cache size == 32 KB
+	if (size == (32 * 1024) {
+		if (assoc == 2) {
+			//size latency + associative latency
+			latency = 5 + 1;
+			return latency;
+		}
+		else if (assoc == 4) {
+			latency = 5 + 2;
+			return latency;
+		}
+		else if (assoc == 8) {
+			latency = 5 + 3;
+			return latency;
+		}
+		else if (assoc == 16) {
+			latency = 5 + 4;
+			return latency;
+		}
+	}
+	//cache size == 64 KB
+	else if (size == (64 * 1024)) {
+		if (assoc == 2) {
+			latency = 6 + 1;
+			return latency;
+		}
+		else if (assoc == 4) {
+			latency = 6 + 2;
+			return latency;
+		}
+		else if (assoc == 8) {
+			latency = 6 + 3;
+			return latency;
+		}
+		else if (assoc == 16) {
+			latency = 6 + 4;
+			return latency;
+		}
+	}
+	//cache size == 128 KB
+	else if (size == (128 * 1024) {
+		if (assoc == 2) {
+			latency = 7 + 1;
+			return latency;
+		}
+		else if (assoc == 4) {
+			latency = 7 + 2;
+			return latency;
+		}
+		else if (assoc == 8) {
+			latency = 7 + 3;
+			return latency;
+		}
+		else if (assoc == 16) {
+			latency = 7 + 4;
+			return latency;
+		}
+	}
+	//cache size == 256 KB
+	else if (size == (256 * 1024) {
+		if (assoc == 2) {
+			latency = 8 + 1;
+			return latency;
+		}
+		else if (assoc == 4) {
+			latency = 8 + 2;
+			return latency;
+		}
+		else if (assoc == 8) {
+			latency = 8 + 3;
+			return latency;
+		}
+		else if (assoc == 16) {
+			latency = 8 + 4;
+			return latency;
+		}
+	}
+	//cache size == 512 KB
+	else if (size == (512 * 1024) {
+		if (assoc == 2) {
+			latency = 9 + 1;
+			return latency;
+		}
+		else if (assoc == 4) {
+			latency = 9 + 2;
+			return latency;
+		}
+		else if (assoc == 8) {
+			latency = 9 + 3;
+			return latency;
+		}
+		else if (assoc == 16) {
+			latency = 9 + 4;
+			return latency;
+		}
+	}
+	//cache size == 1024 KB
+	else if (size == (1024 * 1024) {
+		if (assoc == 2) {
+			latency = 10 + 1;
+			return latency;
+		}
+		else if (assoc == 4) {
+			latency = 10 + 2;
+			return latency;
+		}
+		else if (assoc == 8) {
+			latency = 10 + 3;
+			return latency;
+		}
+		else if (assoc == 16) {
+			latency = 10 + 4;
+			return latency;
+		}
+	}
+}
+
 /*
  * Enter your PSU IDs here to select the appropriate scanning order.
  */
-#define PSU_ID_SUM (912345679+911111111)
+#define PSU_ID_SUM (901437863+965232865)
 
 /*
  * Some global variables to track heuristic progress.
@@ -46,9 +289,35 @@ std::string generateCacheLatencyParams(string halfBackedConfig) {
 	//
 	//YOUR CODE BEGINS HERE
 	//
-
-	// This is a dumb implementation.
 	latencySettings = "1 1 1";
+
+	unsigned int dl1size, il1size, l2size;
+	unsigned int dl1assoc, il1assoc, l2assoc;
+	unsigned int latency1, latency2, latency3;
+
+	//get the size of dl1
+	dl1size = getdl1size(halfBackedConfig);
+	//get the assoc of dl1
+	dl1assoc = 1 << extractConfigPararm(configuration, 4);
+	//get the latency of dl1
+	latency1 = latencycal(dl1size, dl1assoc);
+
+	il1size = getil1size(halfBackedConfig);
+	il1assoc = 1 << extractConfigPararm(configuration, 6);
+	latency2 = latencycal(il1size, il1assoc);
+
+	l2size = getl2size(halfBackedConfig);
+	l2assoc = 1 << extractConfigPararm(configuration, 9);
+	latency3 = latencycal2(l2size, l2assoc);
+
+	//set up latency of dl1
+	latencySettings[0] = latency1 - 1 + '0';
+
+	//set up latency of il1
+	latencySettings[2] = latency2 - 1 + '0';
+
+	//set up latency of l2
+	latencySettings[4] = latency3 - 1 + '0';
 
 	//
 	//YOUR CODE ENDS HERE
@@ -61,9 +330,85 @@ std::string generateCacheLatencyParams(string halfBackedConfig) {
  * Returns 1 if configuration is valid, else 0
  */
 int validateConfiguration(std::string configuration) {
-
+	unsigned int il1blocksize, dl1blocksize, ifqsize, l2blocksize, temp, temp2, dl1size, il1size, l2size;
 	// FIXME - YOUR CODE HERE
 
+	//blocksize of dl1
+	dl1blocksize =  8 * (1 << extractConfigPararm(configuration, 2));
+
+	//blocksize of il1
+	il1blocksize = 8 * (1 << extractConfigPararm(configuration, 2));
+
+	//blocksize of l2
+	l2blocksize = 16 << extractConfigPararm(configuration, 8);
+
+	//blocksize of ifq
+	ifqsize = 8 * (1 << extractConfigPararm(configuration, 0));
+
+	//the size of dl1
+	dl1size = getdl1size(configuration);
+
+	//the size of il1
+	il1size = getil1size(configuration);
+
+	//the size of l2
+	l2size = getl2size(configuration);
+
+	//2 times of blocksize of il1
+	temp = 2 * il1blocksize;
+
+	//2 times (dl1size + il1size)
+	temp2 = 2 * (dl1size + il1size);
+
+	//il1blocksize has to be equal to ifqsize
+	if (il1blocksize != ifqsize) {
+		return 0;
+	}
+
+	//il1blocksize has to be equal to dl1blocksize
+	if (il1blocksize != dl1blocksize) {
+		return 0;
+	}
+
+	//the minimum size of il1 is: 2KB
+	if (il1size < (2 * 1024)) {
+		return 0;
+	}
+
+	//the maximum size of il1 is: 64KB
+	if (il1size > (64 * 1024)) {
+		return 0;
+	}
+
+	//the minimum size of dl1 is: 2KB
+	if (dl1size < (2 * 1024)) {
+		return 0;
+	}
+
+	//the maximum size of dl1 is: 64KB
+	if (dl1size > (64 * 1024)) {
+		return 0;
+	}
+
+	//ul2blocksize has to bigger than 2 times of blocksize of il1
+	if (l2blocksize < temp) {
+		return 0;
+	}
+
+	//ul2size has to bigger than 2 times of (dl1size + il1size)
+	if (l2size < temp2) {
+		return 0;
+	}
+
+	//The minimum size of l2: 32KB
+	if (l2size < (32 * 1024)) {
+		return 0;
+	}
+
+	//The maximum size of l2: 1024KB
+	if (l2size > (1024 * 1024)) {
+		return 0;
+	}
 	// The below is a necessary, but insufficient condition for validating a
 	// configuration.
 	return isNumDimConfiguration(configuration);
