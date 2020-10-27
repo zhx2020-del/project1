@@ -296,7 +296,7 @@ std::string generateCacheLatencyParams(string halfBackedConfig) {
 	//
 	//YOUR CODE ENDS HERE
 	//
-
+	cout << latencySettings << endl;
 	return latencySettings;
 }
 
@@ -335,12 +335,12 @@ int validateConfiguration(std::string configuration) {
 	temp2 = 2 * (dl1size + il1size);
 
 	//il1blocksize has to be equal to ifqsize
-	if (il1blocksize != ifqsize) {
+	if (il1blocksize < ifqsize) {
 		return 0;
 	}
 
 	//il1blocksize has to be equal to dl1blocksize
-	if (il1blocksize != dl1blocksize) {
+	if (il1size != dl1size) {
 		return 0;
 	}
 
