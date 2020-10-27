@@ -36,6 +36,9 @@ unsigned int latencycal(unsigned int size, unsigned int assoc) {
 			latency = 1 + 3;
 			return latency;
 		}
+		else {
+			latency = 1;
+		}
 	}
 	//cache size == 4 KB
 	else if (size == (4 * 1024)) {
@@ -50,6 +53,9 @@ unsigned int latencycal(unsigned int size, unsigned int assoc) {
 		else if (assoc == 8) {
 			latency = 2 + 3;
 			return latency;
+		}
+		else {
+			latency = 2;
 		}
 	}
 	//cache size == 8 KB
@@ -66,6 +72,9 @@ unsigned int latencycal(unsigned int size, unsigned int assoc) {
 			latency = 3 + 3;
 			return latency;
 		}
+		else {
+			latency = 3;
+		}
 	}
 	//cache size == 16 KB
 	else if (size == (16 * 1024)) {
@@ -80,6 +89,9 @@ unsigned int latencycal(unsigned int size, unsigned int assoc) {
 		else if (assoc == 8) {
 			latency = 4 + 3;
 			return latency;
+		}
+		else {
+			latency = 4;
 		}
 	}
 	//cache size == 32 KB
@@ -96,6 +108,9 @@ unsigned int latencycal(unsigned int size, unsigned int assoc) {
 			latency = 5 + 3;
 			return latency;
 		}
+		else {
+			latency = 5;
+		}
 	}
 	//cache size == 64 KB
 	else if (size == (64 * 1024)) {
@@ -110,6 +125,9 @@ unsigned int latencycal(unsigned int size, unsigned int assoc) {
 		else if (assoc == 8) {
 			latency = 6 + 3;
 			return latency;
+		}
+		else {
+			latency = 6;
 		}
 	}
 }
@@ -136,6 +154,9 @@ unsigned int latencycal2(unsigned int size, unsigned int assoc) {
 			latency = 5 + 4;
 			return latency;
 		}
+		else {
+			latency = 5;
+		}
 	}
 	//cache size == 64 KB
 	else if (size == (64 * 1024)) {
@@ -154,6 +175,9 @@ unsigned int latencycal2(unsigned int size, unsigned int assoc) {
 		else if (assoc == 16) {
 			latency = 6 + 4;
 			return latency;
+		}
+		else {
+			latency = 6;
 		}
 	}
 	//cache size == 128 KB
@@ -174,6 +198,9 @@ unsigned int latencycal2(unsigned int size, unsigned int assoc) {
 			latency = 7 + 4;
 			return latency;
 		}
+		else {
+			latency = 7;
+		}
 	}
 	//cache size == 256 KB
 	else if (size == (256 * 1024)) {
@@ -192,6 +219,9 @@ unsigned int latencycal2(unsigned int size, unsigned int assoc) {
 		else if (assoc == 16) {
 			latency = 8 + 4;
 			return latency;
+		}
+		else {
+			latency = 8;
 		}
 	}
 	//cache size == 512 KB
@@ -212,6 +242,9 @@ unsigned int latencycal2(unsigned int size, unsigned int assoc) {
 			latency = 9 + 4;
 			return latency;
 		}
+		else {
+			latency = 9;
+		}
 	}
 	//cache size == 1024 KB
 	else if (size == (1024 * 1024)) {
@@ -230,6 +263,9 @@ unsigned int latencycal2(unsigned int size, unsigned int assoc) {
 		else if (assoc == 16) {
 			latency = 10 + 4;
 			return latency;
+		}
+		else {
+			latency = 10;
 		}
 	}
 }
