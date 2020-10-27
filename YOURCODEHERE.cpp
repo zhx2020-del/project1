@@ -38,6 +38,7 @@ unsigned int latencycal(unsigned int size, unsigned int assoc) {
 		}
 		else {
 			latency = 1;
+			return latency;
 		}
 	}
 	//cache size == 4 KB
@@ -56,6 +57,7 @@ unsigned int latencycal(unsigned int size, unsigned int assoc) {
 		}
 		else {
 			latency = 2;
+			return latency;
 		}
 	}
 	//cache size == 8 KB
@@ -74,6 +76,7 @@ unsigned int latencycal(unsigned int size, unsigned int assoc) {
 		}
 		else {
 			latency = 3;
+			return latency;
 		}
 	}
 	//cache size == 16 KB
@@ -92,6 +95,7 @@ unsigned int latencycal(unsigned int size, unsigned int assoc) {
 		}
 		else {
 			latency = 4;
+			return latency;
 		}
 	}
 	//cache size == 32 KB
@@ -110,6 +114,7 @@ unsigned int latencycal(unsigned int size, unsigned int assoc) {
 		}
 		else {
 			latency = 5;
+			return latency;
 		}
 	}
 	//cache size == 64 KB
@@ -128,6 +133,7 @@ unsigned int latencycal(unsigned int size, unsigned int assoc) {
 		}
 		else {
 			latency = 6;
+			return latency;
 		}
 	}
 }
@@ -156,6 +162,7 @@ unsigned int latencycal2(unsigned int size, unsigned int assoc) {
 		}
 		else {
 			latency = 5;
+			return latency;
 		}
 	}
 	//cache size == 64 KB
@@ -178,6 +185,7 @@ unsigned int latencycal2(unsigned int size, unsigned int assoc) {
 		}
 		else {
 			latency = 6;
+			return latency;
 		}
 	}
 	//cache size == 128 KB
@@ -200,6 +208,7 @@ unsigned int latencycal2(unsigned int size, unsigned int assoc) {
 		}
 		else {
 			latency = 7;
+			return latency;
 		}
 	}
 	//cache size == 256 KB
@@ -222,6 +231,7 @@ unsigned int latencycal2(unsigned int size, unsigned int assoc) {
 		}
 		else {
 			latency = 8;
+			return latency;
 		}
 	}
 	//cache size == 512 KB
@@ -244,6 +254,7 @@ unsigned int latencycal2(unsigned int size, unsigned int assoc) {
 		}
 		else {
 			latency = 9;
+			return latency;
 		}
 	}
 	//cache size == 1024 KB
@@ -266,6 +277,7 @@ unsigned int latencycal2(unsigned int size, unsigned int assoc) {
 		}
 		else {
 			latency = 10;
+			return latency;
 		}
 	}
 }
