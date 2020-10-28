@@ -364,7 +364,7 @@ int validateConfiguration(std::string configuration) {
 	l2blocksize = 16 << extractConfigPararm(configuration, 8);
 
 	//blocksize of ifq
-	ifqsize = 8 * (1 << extractConfigPararm(configuration, 0));
+	ifqsize = (1 << extractConfigPararm(configuration, 0));
 
 	//the size of dl1
 	dl1size = getdl1size(configuration);
