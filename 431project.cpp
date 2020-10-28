@@ -84,7 +84,8 @@ int main(int argc, char** argv) {
 	std::string bestTimeconfig = GLOB_baseline;
 	std::string bestEDPconfig = GLOB_baseline;
 	std::string currentConfiguration = GLOB_baseline;
-
+	
+	int changed = 0;
 	for (unsigned int iter = 0; iter < 1000; ++iter) {
 
 		std::string nextconf = generateNextConfigurationProposal(
@@ -121,11 +122,13 @@ int main(int argc, char** argv) {
 		if (proposedGeoTime < bestTime) {
 			bestTimeconfig = nextconf;
 			bestTime = proposedGeoTime;
+			//changed++;
 		}
 
 		if (proposedGeoEDP < bestEDP) {
 			bestEDPconfig = nextconf;
 			bestEDP = proposedGeoEDP;
+			//changed++
 		}
 
 		std::cout << std::endl << "             " << "proposedGeoEDP="

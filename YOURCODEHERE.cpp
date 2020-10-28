@@ -521,7 +521,7 @@ std::string generateNextConfigurationProposal(std::string currentconfiguration,
 		// Fill in remaining independent params with 0.
 		for (int dim = (currentlyExploringDim + 1);
 				dim < (NUM_DIMS - NUM_DIMS_DEPENDENT); ++dim) {
-			ss << "0 ";
+			ss << nextconfiguration[dim];
 		}
 
 		//
@@ -546,6 +546,8 @@ std::string generateNextConfigurationProposal(std::string currentconfiguration,
 		// Signal that DSE is complete after this configuration.
 		if (currentlyExploringDim == (NUM_DIMS - NUM_DIMS_DEPENDENT))
 			isDSEComplete = true;
+
+
 	}
 	return nextconfiguration;
 }
