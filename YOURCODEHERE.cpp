@@ -384,71 +384,71 @@ int validateConfiguration(std::string configuration) {
 
 	//il1blocksize >=  ifqsize
 	if (il1blocksize < ifqsize) {
-		cout << "wrong config: "<<configuration<<endl;
-		cout << "il1blocksize: " << il1blocksize << "ifqsize: " << ifqsize <<"has to be equal"<<endl;
+		//cout << "wrong config: "<<configuration<<endl;
+		//cout << "il1blocksize: " << il1blocksize << "ifqsize: " << ifqsize <<"has to be equal"<<endl;
 		return 0;
 	}
 
 	//il1blocksize has to be equal to dl1blocksize
 	if (il1blocksize != dl1blocksize) {
-		cout << "wrong config: " << configuration << endl;
-		cout << "il1blocksize: " << il1blocksize << "dl1blocksize: " << dl1blocksize << "has to be equal" << endl;
+		//cout << "wrong config: " << configuration << endl;
+		//cout << "il1blocksize: " << il1blocksize << "dl1blocksize: " << dl1blocksize << "has to be equal" << endl;
 		return 0;
 	}
 
 	//the minimum size of il1 is: 2KB
 	if (il1size < (2 * 1024)) {
-		cout << "wrong config: " << configuration << endl;
-		cout << "il1size: "<< il1size <<"the minimum size of il1 is: 2KB"<<endl;
+		//cout << "wrong config: " << configuration << endl;
+		//cout << "il1size: "<< il1size <<"the minimum size of il1 is: 2KB"<<endl;
 		return 0;
 	}
 
 	//the maximum size of il1 is: 64KB
 	if (il1size > (64 * 1024)) {
-		cout << "wrong config: " << configuration << endl;
-		cout << "il1size: " << il1size << "the maximum size of il1 is: 64KB" << endl;
+		//cout << "wrong config: " << configuration << endl;
+		//cout << "il1size: " << il1size << "the maximum size of il1 is: 64KB" << endl;
 		return 0;
 	}
 
 	//the minimum size of dl1 is: 2KB
 	if (dl1size < (2 * 1024)) {
-		cout << "wrong config: " << configuration << endl;
-		cout << "dl1size: " << dl1size << "the minimum size of dl1 is: 2KB" << endl;
+		//cout << "wrong config: " << configuration << endl;
+		//cout << "dl1size: " << dl1size << "the minimum size of dl1 is: 2KB" << endl;
 		return 0;
 	}
 
 	//the maximum size of dl1 is: 64KB
 	if (dl1size > (64 * 1024)) {
-		cout << "wrong config: " << configuration << endl;
-		cout << "dl1size: " << dl1size << "the maximum size of dl1 is: 64KB" << endl;
+		//cout << "wrong config: " << configuration << endl;
+		//cout << "dl1size: " << dl1size << "the maximum size of dl1 is: 64KB" << endl;
 		return 0;
 	}
 
 	//ul2blocksize has to bigger than 2 times of blocksize of il1
 	if (l2blocksize < temp) {
-		cout << "wrong config: " << configuration << endl;
-		cout << "l2blocksize: " << l2blocksize <<"temp: "<<temp<<"ul2blocksize has to bigger than 2 times of blocksize of il1" << endl;
+		//cout << "wrong config: " << configuration << endl;
+		//cout << "l2blocksize: " << l2blocksize <<"temp: "<<temp<<"ul2blocksize has to bigger than 2 times of blocksize of il1" << endl;
 		return 0;
 	}
 
 	//ul2size has to bigger than 2 times of (dl1size + il1size)
 	if (l2size < temp2) {
-		cout << "wrong config: " << configuration << endl;
-		cout << "l2size: " << l2size << "temp2: " << temp2 << "ul2size has to bigger than 2 times of (dl1size + il1size)" << endl;
+		//cout << "wrong config: " << configuration << endl;
+		//cout << "l2size: " << l2size << "temp2: " << temp2 << "ul2size has to bigger than 2 times of (dl1size + il1size)" << endl;
 		return 0;
 	}
 
 	//The minimum size of l2: 32KB
 	if (l2size < (32 * 1024)) {
-		cout << "wrong config: " << configuration << endl;
-		cout << "l2size: " << l2size << "The minimum size of l2: 32KB" << endl;
+		//cout << "wrong config: " << configuration << endl;
+		//cout << "l2size: " << l2size << "The minimum size of l2: 32KB" << endl;
 		return 0;
 	}
 
 	//The maximum size of l2: 1024KB
 	if (l2size > (1024 * 1024)) {
-		cout << "wrong config: " << configuration << endl;
-		cout << "l2size: " << l2size << "The maximum size of l2: 1024KB" << endl;
+		//cout << "wrong config: " << configuration << endl;
+		//cout << "l2size: " << l2size << "The maximum size of l2: 1024KB" << endl;
 		return 0;
 	}
 	// The below is a necessary, but insufficient condition for validating a
@@ -457,6 +457,53 @@ int validateConfiguration(std::string configuration) {
 	return isNumDimConfiguration(configuration);
 }
 
+int convertdim(int cd) {
+	if (cd == 0) {
+		return 12;
+	}
+	else if(cd == 1) {
+		return 13;
+	}
+	else if (cd == 2) {
+		return 14;
+	}
+	else if (cd == 3) {
+		return 2;
+	}
+	else if (cd == 4) {
+		return 3;
+	}
+	else if (cd == 5) {
+		return 4;
+	}
+	else if (cd == 6) {
+		return 5;
+	}
+	else if (cd == 7) {
+		return 6;
+	}
+	else if (cd == 8) {
+		return 7;
+	}
+	else if (cd == 9) {
+		return 8;
+	}
+	else if (cd == 10) {
+		return 9;
+	}
+	else if (cd == 11) {
+		return 10;
+	}
+	else if (cd == 12) {
+		return 0;
+	}
+	else if (cd == 13) {
+		return 1;
+	}
+	else if (cd == 14) {
+		return 11;
+	}
+}
 /*
  * Given the current best known configuration, the current configuration,
  * and the globally visible map of all previously investigated configurations,
@@ -491,6 +538,8 @@ std::string generateNextConfigurationProposal(std::string currentconfiguration,
 			return currentconfiguration;
 		}
 
+		int newdim = convertdim(currentlyExploringDim);
+
 		std::stringstream ss;
 
 		string bestConfig;
@@ -503,7 +552,7 @@ std::string generateNextConfigurationProposal(std::string currentconfiguration,
 		// Fill in the dimensions already-scanned with the already-selected best
 		// value.
 
-		for (int dim = 0; dim < currentlyExploringDim; ++dim) {
+		for (int dim = 0; dim < newdim; ++dim) {
 			ss << extractConfigPararm(bestConfig, dim) << " ";
 		}
 
@@ -511,7 +560,7 @@ std::string generateNextConfigurationProposal(std::string currentconfiguration,
 		// Handling for currently exploring dimension. This is a very dumb
 		// implementation.
 		int nextValue = extractConfigPararm(nextconfiguration,
-				currentlyExploringDim) + 1;
+				newdim) + 1;
 
 		if (coun == 0 && nextValue > 1){
 			temp = nextValue;
@@ -525,8 +574,8 @@ std::string generateNextConfigurationProposal(std::string currentconfiguration,
 
 		coun++;
 
-		if (nextValue >= GLOB_dimensioncardinality[currentlyExploringDim]) {
-			nextValue = GLOB_dimensioncardinality[currentlyExploringDim] - 1;
+		if (nextValue >= GLOB_dimensioncardinality[newdim]) {
+			nextValue = GLOB_dimensioncardinality[newdim] - 1;
 			currentDimDone = true;
 			coun = 0;
 		}
@@ -534,7 +583,7 @@ std::string generateNextConfigurationProposal(std::string currentconfiguration,
 		ss << nextValue << " ";
 
 		// Fill in remaining independent params with 0.
-		for (int dim = (currentlyExploringDim + 1);
+		for (int dim = (newdim + 1);
 				dim < (NUM_DIMS - NUM_DIMS_DEPENDENT); ++dim) {
 			ss << extractConfigPararm(nextconfiguration,dim)<<" ";
 		}
