@@ -516,13 +516,14 @@ std::string generateNextConfigurationProposal(std::string currentconfiguration,
 		if (coun == 0 && nextValue > 1){
 			temp = nextValue;
 			nextValue = 0;
-			coun++;
 		}
 
 		if (nextValue == temp) {
-			nextValue++;
+			nextValue;
 			temp = 99;
 		}
+
+		coun++;
 
 		if (nextValue >= GLOB_dimensioncardinality[currentlyExploringDim]) {
 			nextValue = GLOB_dimensioncardinality[currentlyExploringDim] - 1;
@@ -559,8 +560,8 @@ std::string generateNextConfigurationProposal(std::string currentconfiguration,
 
 		// Signal that DSE is complete after this configuration.
 		if (currentlyExploringDim == (NUM_DIMS - NUM_DIMS_DEPENDENT))
-			isDSEComplete = true;
-
+			//isDSEComplete = true;
+			currentlyExploringDim = 0;
 
 	}
 	return nextconfiguration;
