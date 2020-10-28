@@ -296,6 +296,7 @@ unsigned int latencycal2(unsigned int size, unsigned int assoc) {
 unsigned int currentlyExploringDim = 0;
 bool currentDimDone = false;
 bool isDSEComplete = false;
+int coun = 0, temp = 99;
 
 /*
  * Given a half-baked configuration containing cache properties, generate
@@ -364,7 +365,7 @@ int validateConfiguration(std::string configuration) {
 	l2blocksize = 16 << extractConfigPararm(configuration, 8);
 
 	//blocksize of ifq
-	ifqsize = (1 << extractConfigPararm(configuration, 0));
+	ifqsize = 8 * (1 << extractConfigPararm(configuration, 0));
 
 	//the size of dl1
 	dl1size = getdl1size(configuration);
@@ -381,7 +382,7 @@ int validateConfiguration(std::string configuration) {
 	//2 times (dl1size + il1size)
 	temp2 = 2 * (dl1size + il1size);
 
-	//il1blocksize has to be equal to ifqsize
+	//il1blocksize >=  ifqsize
 	if (il1blocksize < ifqsize) {
 		cout << "wrong config: "<<configuration<<endl;
 		cout << "il1blocksize: " << il1blocksize << "ifqsize: " << ifqsize <<"has to be equal"<<endl;
@@ -506,14 +507,27 @@ std::string generateNextConfigurationProposal(std::string currentconfiguration,
 			ss << extractConfigPararm(bestConfig, dim) << " ";
 		}
 
+		
 		// Handling for currently exploring dimension. This is a very dumb
 		// implementation.
 		int nextValue = extractConfigPararm(nextconfiguration,
 				currentlyExploringDim) + 1;
 
+		if (coun == 0 && nextValue > 1){
+			temp = nextValue;
+			nextValue = 0;
+			coun++;
+		}
+
+		if (nextValue == temp) {
+			nextValue++;
+			temp = 99;
+		}
+
 		if (nextValue >= GLOB_dimensioncardinality[currentlyExploringDim]) {
 			nextValue = GLOB_dimensioncardinality[currentlyExploringDim] - 1;
 			currentDimDone = true;
+			coun = 0;
 		}
 
 		ss << nextValue << " ";
@@ -521,7 +535,7 @@ std::string generateNextConfigurationProposal(std::string currentconfiguration,
 		// Fill in remaining independent params with 0.
 		for (int dim = (currentlyExploringDim + 1);
 				dim < (NUM_DIMS - NUM_DIMS_DEPENDENT); ++dim) {
-			ss << nextconfiguration[dim];
+			ss << extractConfigPararm(nextconfiguration,dim)<<" ";
 		}
 
 		//
