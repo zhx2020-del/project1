@@ -504,7 +504,7 @@ int convertdim(int cd) {
 		return 11;
 	}
 }
-int same = 0;
+
 /*
  * Given the current best known configuration, the current configuration,
  * and the globally visible map of all previously investigated configurations,
@@ -527,6 +527,8 @@ std::string generateNextConfigurationProposal(std::string currentconfiguration,
 	// 3. NUM_DIMS
 	// 4. NUM_DIMS_DEPENDENT
 	// 5. GLOB_seen_configurations
+
+	int same = 0;
 
 	std::string nextconfiguration = currentconfiguration;
 	// Continue if proposed configuration is invalid or has been seen/checked before.
