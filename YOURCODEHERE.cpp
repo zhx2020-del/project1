@@ -504,6 +504,7 @@ int convertdim(int cd) {
 		return 11;
 	}
 }
+int same = 0;
 /*
  * Given the current best known configuration, the current configuration,
  * and the globally visible map of all previously investigated configurations,
@@ -539,7 +540,6 @@ std::string generateNextConfigurationProposal(std::string currentconfiguration,
 		}
 
 		int newdim = convertdim(currentlyExploringDim);
-
 		std::stringstream ss;
 
 		string bestConfig;
@@ -604,6 +604,7 @@ std::string generateNextConfigurationProposal(std::string currentconfiguration,
 		// Make sure we start exploring next dimension in next iteration.
 		if (currentDimDone) {
 			currentlyExploringDim++;
+			same++;
 			currentDimDone = false;
 		}
 
@@ -612,6 +613,8 @@ std::string generateNextConfigurationProposal(std::string currentconfiguration,
 			//isDSEComplete = true;
 			currentlyExploringDim = 0;
 
+		if (same == (NUM_DIMS - NUM_DIMS_DEPENDENT))
+			isDSEComplete = true;
 	}
 	return nextconfiguration;
 }
